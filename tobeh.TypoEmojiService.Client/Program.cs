@@ -1,4 +1,4 @@
-﻿namespace tobeh.TypoLinkedRolesService.Client;
+﻿namespace tobeh.TypoEmojiService.Client;
 
 class Program
 {

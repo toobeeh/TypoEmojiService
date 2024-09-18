@@ -1,11 +1,11 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
-option csharp_namespace = "tobeh.TypoLinkedRolesService";
+option csharp_namespace = "tobeh.EmojiService";
 
-package linkedRoles;
+package emojis;
 
-service LinkedRoles {
+service Emojis {
   rpc SayHi(google.protobuf.Empty) returns (HiResponse);
 }
 

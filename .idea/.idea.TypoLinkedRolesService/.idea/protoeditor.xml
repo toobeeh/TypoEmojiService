@@ -7,7 +7,7 @@
           <option name="location" value="file://$USER_HOME$/protobuf/src" />
         </ImportPathEntry>
         <ImportPathEntry>
-          <option name="location" value="file://$PROJECT_DIR$/../TypoImageGen/tobeh.TypoContentService.Server/Protos" />
+          <option name="location" value="file://$PROJECT_DIR$/tobeh.TypoEmojiService.Server/Protos" />
         </ImportPathEntry>
       </list>
     </option>

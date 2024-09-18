@@ -3,7 +3,7 @@ using Grpc.Core;
 using Grpc.Net.ClientFactory;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace tobeh.TypoLinkedRolesService.Client.Util;
+namespace tobeh.TypoEmojiService.Client.Util;
 
 public static class GrpcRegistrationExtension
 {

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tobeh.TypoEmojiService.Client", "tobeh.TypoEmojiService.Client\tobeh.TypoEmojiService.Client.csproj", "{0A1D4225-6A34-4D56-8623-2B20FE2AAA70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tobeh.TypoEmojiService.Server", "tobeh.TypoEmojiService.Server\tobeh.TypoEmojiService.Server.csproj", "{7D7C9DDD-7950-4395-BD1B-43500ABA48C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A1D4225-6A34-4D56-8623-2B20FE2AAA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A1D4225-6A34-4D56-8623-2B20FE2AAA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A1D4225-6A34-4D56-8623-2B20FE2AAA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A1D4225-6A34-4D56-8623-2B20FE2AAA70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D7C9DDD-7950-4395-BD1B-43500ABA48C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7C9DDD-7950-4395-BD1B-43500ABA48C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7C9DDD-7950-4395-BD1B-43500ABA48C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7C9DDD-7950-4395-BD1B-43500ABA48C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

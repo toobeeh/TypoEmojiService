@@ -1,9 +1,8 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using tobeh.TypoLinkedRolesService.Server.Grpc;
-using tobeh.Valmar.Client.Util;
+using tobeh.TypoEmojiService.Server.Grpc;
 
-namespace tobeh.TypoLinkedRolesService.Server;
+namespace tobeh.TypoEmojiService.Server;
 
 class Program
 {
@@ -38,9 +37,6 @@ class Program
         builder.Services.AddGrpc();
         builder.Services.AddHttpClient();
         builder.Services.AddLogging();
-        builder.Services.AddValmarGrpc(
-            builder.Configuration.GetRequiredSection("Grpc").GetValue<string>("ValmarAddress") ??
-            throw new ArgumentException("No Valmar URL provided"));
         
         //builder.Services.AddScoped<servicename>();
         //builder.Services.Configure<configname>(builder.Configuration.GetSection("Git"));
@@ -51,7 +47,7 @@ class Program
     private static void SetupRoutes(WebApplication app)
     {
         // Configure the HTTP request pipeline
-        app.MapGrpcService<LinkedRolesGrpcService>();
+        app.MapGrpcService<EmojisGrpcService>();
         app.MapGet("/",
             () =>
                 "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
