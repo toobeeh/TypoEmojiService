@@ -1,6 +1,9 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using tobeh.TypoEmojiService.Server.Config;
+using tobeh.TypoEmojiService.Server.Database;
 using tobeh.TypoEmojiService.Server.Grpc;
+using tobeh.TypoEmojiService.Server.Service;
 
 namespace tobeh.TypoEmojiService.Server;
 
@@ -9,6 +12,7 @@ class Program
     public static void Main(string[] args)
     {
         SetupCulture();
+        AppDatabaseContext.EnsureDatabaseExists();
         var builder = SetupApp(args);
         var app = builder.Build();
         SetupRoutes(app);
@@ -35,8 +39,12 @@ class Program
 
         // Add services to the container.
         builder.Services.AddGrpc();
+        builder.Services.AddDbContext<AppDatabaseContext>();
         builder.Services.AddHttpClient();
         builder.Services.AddLogging();
+        builder.Services.AddScoped<EmojiApiScraper>();
+        builder.Services.AddScoped<SavedEmojiService>();
+        builder.Services.Configure<ScraperConfig>(builder.Configuration.GetSection("Scraper"));
         
         //builder.Services.AddScoped<servicename>();
         //builder.Services.Configure<configname>(builder.Configuration.GetSection("Git"));

@@ -6,11 +6,32 @@ option csharp_namespace = "tobeh.EmojiService";
 package emojis;
 
 service Emojis {
-  rpc SayHi(google.protobuf.Empty) returns (HiResponse);
+  rpc LoadNewEmojiCandidates(SearchEmojisMessage) returns (stream EmojiCandidateMessage);
+  rpc ListEmojis(SearchEmojisMessage) returns (stream EmojiMessage);
+  rpc AddEmojis(EmojiCandidateMessage) returns (EmojiIdentificationMessage);
+  rpc RemoveEmoji(EmojiIdentificationMessage) returns (google.protobuf.Empty);
 }
 
-message HiResponse {
-  string message = 1;
-};
+message SearchEmojisMessage {
+  string name = 1;
+  bool animated = 2;
+  bool static = 3;
+  int32 maxCount = 4;
+}
 
+message EmojiCandidateMessage {
+  string url = 1;
+  bool animated = 2;
+  string name = 3;
+}
 
+message EmojiMessage {
+  EmojiIdentificationMessage id = 1;
+  string url = 2;
+  bool animated = 3;
+}
+
+message EmojiIdentificationMessage {
+  string name = 1;
+  int32 nameId = 2;
+}
