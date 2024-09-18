@@ -1,11 +1,11 @@
 services:
-  typo-linked-roles-service:
-    container_name: typo-linked-roles-service
+  typo-emoji-service:
+    container_name: typo-emoji-service
     build:
       context: ../
       dockerfile: .docker/Dockerfile
     restart: unless-stopped
-    environment:
-      - GRPC_VALMAR_URL=http://host.docker.internal:5175
+    volumes:
+      - path-to-appsettings.json:/app/appsettings.json
     ports:
-      - "5221:8080"
+      - "5124:8080"
