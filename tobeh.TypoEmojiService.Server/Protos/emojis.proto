@@ -8,7 +8,7 @@ package emojis;
 service Emojis {
   rpc LoadNewEmojiCandidates(SearchEmojisMessage) returns (stream EmojiCandidateMessage);
   rpc ListEmojis(SearchEmojisMessage) returns (stream EmojiMessage);
-  rpc AddEmojis(EmojiCandidateMessage) returns (EmojiIdentificationMessage);
+  rpc AddEmoji(EmojiCandidateMessage) returns (EmojiIdentificationMessage);
   rpc RemoveEmoji(EmojiIdentificationMessage) returns (google.protobuf.Empty);
 }
 

@@ -20,16 +20,6 @@
             <OutputDir>Grpc</OutputDir>
             <Generator>MSBuild:Compile</Generator>
         </Protobuf>
-        <Protobuf Include="..\tobeh.TypoEmojiService.Server\Protos\emojis.proto">
-          <GrpcServices>Client</GrpcServices>
-          <Access>Public</Access>
-          <ProtoCompile>True</ProtoCompile>
-          <ProtoRoot>../tobeh.TypoLinkedRolesService.Server/Protos</ProtoRoot>
-          <CompileOutputs>True</CompileOutputs>
-          <OutputDir>Grpc</OutputDir>
-          <Generator>MSBuild:Compile</Generator>
-          <Link>Protos\emojis.proto</Link>
-        </Protobuf>
     </ItemGroup>
 
 </Project>

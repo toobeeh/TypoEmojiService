@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - '.github/workflows/publish-client.yml'
-      - 'tobeh.TypoLinkedRolesService.Client/**'
+      - 'tobeh.TypoEmojiService.Client/**'
 
 jobs:
   build:
@@ -26,16 +26,16 @@ jobs:
         run: echo "::set-output name=timestamp::$(date +%s)"
 
       - name: Build
-        run: dotnet build tobeh.TypoLinkedRolesService.Client/tobeh.TypoLinkedRolesService.Client.csproj --configuration Release
+        run: dotnet build tobeh.TypoEmojiService.Client/tobeh.TypoEmojiService.Client.csproj --configuration Release
 
       - name: Package
         run: |
           PACKAGE_VERSION="0.1.${{ steps.version.outputs.timestamp }}"
-          dotnet pack tobeh.TypoLinkedRolesService.Client/tobeh.TypoLinkedRolesService.Client.csproj --no-restore --no-build --configuration Release -p:PackageID=tobeh.TypoLinkedRolesService.Client -p:PackageVersion=$PACKAGE_VERSION -o ./nupkg
+          dotnet pack tobeh.TypoEmojiService.Client/tobeh.TypoEmojiService.Client.csproj --no-restore --no-build --configuration Release -p:PackageID=tobeh.TypoEmojiService.Client -p:PackageVersion=$PACKAGE_VERSION -o ./nupkg
 
       - name: Publish
         run: |
           PACKAGE_VERSION="0.1.${{ steps.version.outputs.timestamp }}"
-          dotnet nuget push "./nupkg/tobeh.TypoLinkedRolesService.Client.$PACKAGE_VERSION.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+          dotnet nuget push "./nupkg/tobeh.TypoEmojiService.Client.$PACKAGE_VERSION.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

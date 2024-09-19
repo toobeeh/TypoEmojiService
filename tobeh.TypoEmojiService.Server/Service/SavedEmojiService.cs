@@ -47,7 +47,7 @@ public class SavedEmojiService(ILogger<SavedEmojiService> logger, AppDatabaseCon
         if (statics == false && animated == false) statics = animated = true;
         
         var emojis = await db.Emojis
-            .Where(emoji => emoji.Name.Contains(name) && emoji.Animated == animated || emoji.Animated == statics)
+            .Where(emoji => emoji.Name.Contains(name) && (emoji.Animated == animated || emoji.Animated != statics))
             .Take(maxCount)
             .ToListAsync();
 

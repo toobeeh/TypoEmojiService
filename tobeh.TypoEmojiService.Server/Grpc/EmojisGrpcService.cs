@@ -12,6 +12,11 @@ public class EmojisGrpcService(ILogger<EmojisGrpcService> logger, EmojiApiScrape
         ServerCallContext context)
     {
         logger.LogTrace("LoadNewEmojiCandidates({request})", request);
+        
+        if(request.Static == request.Animated)
+        {
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Either static or animated mode must be enabled, but not both"));
+        }
 
         var count = 0;
         var nextPage = 1;
@@ -52,7 +57,7 @@ public class EmojisGrpcService(ILogger<EmojisGrpcService> logger, EmojiApiScrape
         }
     }
 
-    public override async Task<EmojiIdentificationMessage> AddEmojis(EmojiCandidateMessage request, ServerCallContext context)
+    public override async Task<EmojiIdentificationMessage> AddEmoji(EmojiCandidateMessage request, ServerCallContext context)
     {
         var emoji = await savedEmojiService.SaveEmoji(request.Name, request.Url, request.Animated);
         return new EmojiIdentificationMessage { Name = emoji.Name, NameId = emoji.Id };

@@ -6,11 +6,11 @@ on:
       - main
     paths:
       - '.github/workflows/publish-server.yml'
-      - 'tobeh.TypoLinkedRolesService.Server/**'
+      - 'tobeh.TypoEmojiService.Server/**'
 
 env:
-  IMAGE_NAME: typo-linked-roles-service
-  DOCKERFILE_PATH: ./tobeh.TypoLinkedRolesService.Server/.docker/Dockerfile
+  IMAGE_NAME: typo-emoji-service
+  DOCKERFILE_PATH: ./tobeh.TypoEmojiService.Server/.docker/Dockerfile
 
 jobs:
   build-and-publish:
@@ -30,7 +30,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./tobeh.TypoLinkedRolesService.Server
+          context: ./tobeh.TypoEmojiService.Server
           file: ${{ env.DOCKERFILE_PATH }}
           push: true
           tags: ghcr.io/toobeeh/${{ env.IMAGE_NAME }}:latest
