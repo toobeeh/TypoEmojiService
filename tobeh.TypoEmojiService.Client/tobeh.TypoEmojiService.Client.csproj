@@ -12,14 +12,18 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Update="../tobeh.TypoLinkedRolesService.Server/Protos/*.proto" />
-        <Protobuf Include="../tobeh.TypoLinkedRolesService.Server/Protos/*.proto" GrpcServices="Client" ProtoRoot="../tobeh.TypoLinkedRolesService.Server/Protos">
+        <Protobuf Update="../tobeh.TypoEmojiService.Server/Protos/*.proto" />
+        <Protobuf Include="../tobeh.TypoEmojiService.Server/Protos/*.proto" GrpcServices="Client" ProtoRoot="../tobeh.TypoEmojiService.Server/Protos">
             <Access>Public</Access>
             <ProtoCompile>True</ProtoCompile>
             <CompileOutputs>True</CompileOutputs>
             <OutputDir>Grpc</OutputDir>
             <Generator>MSBuild:Compile</Generator>
         </Protobuf>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Grpc\" />
     </ItemGroup>
 
 </Project>
