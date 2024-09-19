@@ -28,10 +28,15 @@ public class EmojisGrpcService(ILogger<EmojisGrpcService> logger, EmojiApiScrape
             
             foreach (var candidate in candidates)
             {
+                if (count >= request.MaxCount) break;
+                
+                var url = $"https://cdn.discordapp.com/emojis/{candidate.Id}.{(candidate.Animated ? "gif" : "png")}";
+                if(await savedEmojiService.HasEmoji(url)) continue;
+                
                 await responseStream.WriteAsync(new EmojiCandidateMessage
                 {
                     Name = candidate.Name,
-                    Url = $"https://cdn.discordapp.com/emojis/{candidate.Name}.{(candidate.Animated ? "gif" : "png")}",
+                    Url = url,
                     Animated = candidate.Animated
                 });
                 count++;
@@ -59,13 +64,30 @@ public class EmojisGrpcService(ILogger<EmojisGrpcService> logger, EmojiApiScrape
 
     public override async Task<EmojiIdentificationMessage> AddEmoji(EmojiCandidateMessage request, ServerCallContext context)
     {
+        logger.LogTrace("AddEmoji({request})", request);
+        
         var emoji = await savedEmojiService.SaveEmoji(request.Name, request.Url, request.Animated);
         return new EmojiIdentificationMessage { Name = emoji.Name, NameId = emoji.Id };
     }
 
     public override async Task<Empty> RemoveEmoji(EmojiIdentificationMessage request, ServerCallContext context)
     {
+        logger.LogTrace("RemoveEmoji({request})", request);
+        
         await savedEmojiService.RemoveEmoji(request.Name, request.NameId);
         return new Empty();
+    }
+
+    public override async Task<EmojiMessage> GetEmoji(EmojiIdentificationMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GetEmoji({request})", request);
+        
+        var emoji = await savedEmojiService.GetEmoji(request.Name, request.NameId);
+        return new EmojiMessage
+        {
+            Id = new EmojiIdentificationMessage { Name = emoji.Name, NameId = emoji.Id },
+            Url = emoji.Url,
+            Animated = emoji.Animated
+        };
     }
 }

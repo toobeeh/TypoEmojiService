@@ -10,12 +10,12 @@ public class SavedEmojiService(ILogger<SavedEmojiService> logger, AppDatabaseCon
     {
         logger.LogTrace("SaveEmoji(name={name}, url={url}, animated={animated})", name, url, animated);
 
-        var existingWithName = await db.Emojis.CountAsync(emoji => emoji.Name == name);
+        var nextNameId = await db.Emojis.Where(emoji => emoji.Name == name).MaxAsync(emoji => (int?)emoji.Id) ?? 0;
         
         var emoji = new EmojiEntity
         {
             Name = name,
-            Id = existingWithName,
+            Id = nextNameId,
             Url = url,
             Animated = animated
         };
@@ -52,6 +52,26 @@ public class SavedEmojiService(ILogger<SavedEmojiService> logger, AppDatabaseCon
             .ToListAsync();
 
         return emojis;
+    }
+    
+    public async Task<bool> HasEmoji(string url)
+    {
+        logger.LogTrace("HasEmoji(url={url})", url);
+        
+        return await db.Emojis.AnyAsync(emoji => emoji.Url == url);
+    }
+    
+    public async Task<EmojiEntity> GetEmoji(string name, int nameId)
+    {
+        logger.LogTrace("GetEmoji(name={name}, nameId={nameId})", name, nameId);
+        
+        var emoji = await db.Emojis.FirstOrDefaultAsync(emoji => emoji.Name == name && emoji.Id == nameId);
+        if (emoji == null)
+        {
+            throw new InvalidOperationException("Emoji not found");
+        }
+
+        return emoji;
     }
     
 }

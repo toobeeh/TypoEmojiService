@@ -10,6 +10,7 @@ service Emojis {
   rpc ListEmojis(SearchEmojisMessage) returns (stream EmojiMessage);
   rpc AddEmoji(EmojiCandidateMessage) returns (EmojiIdentificationMessage);
   rpc RemoveEmoji(EmojiIdentificationMessage) returns (google.protobuf.Empty);
+  rpc GetEmoji(EmojiIdentificationMessage) returns (EmojiMessage);
 }
 
 message SearchEmojisMessage {
