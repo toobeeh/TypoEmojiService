@@ -10,12 +10,12 @@ public class SavedEmojiService(ILogger<SavedEmojiService> logger, AppDatabaseCon
     {
         logger.LogTrace("SaveEmoji(name={name}, url={url}, animated={animated})", name, url, animated);
 
-        var nextNameId = await db.Emojis.Where(emoji => emoji.Name == name).MaxAsync(emoji => (int?)emoji.Id) ?? 0;
+        var lastNameId = await db.Emojis.Where(emoji => emoji.Name == name).MaxAsync(emoji => (int?)emoji.Id);
         
         var emoji = new EmojiEntity
         {
             Name = name,
-            Id = nextNameId,
+            Id = lastNameId is {} id ? id + 1 : 0,
             Url = url,
             Animated = animated
         };
