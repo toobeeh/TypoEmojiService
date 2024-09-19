@@ -66,6 +66,11 @@ public class EmojisGrpcService(ILogger<EmojisGrpcService> logger, EmojiApiScrape
     {
         logger.LogTrace("AddEmoji({request})", request);
         
+        if(await savedEmojiService.HasEmoji(request.Url))
+        {
+            throw new RpcException(new Status(StatusCode.AlreadyExists, "Emoji already with same image exists"));
+        }
+        
         var emoji = await savedEmojiService.SaveEmoji(request.Name, request.Url, request.Animated);
         return new EmojiIdentificationMessage { Name = emoji.Name, NameId = emoji.Id };
     }
